@@ -4,11 +4,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 // 设置系统时区
 date_default_timezone_set('UTC');
-error_reporting(E_ALL);
 
 use Aliyun\AliyunClient as Client;
 use Aliyun\Request\AddDomainRecord;
 use Aliyun\Request\DescribeDomainRecords;
+use Aliyun\Request\DeleteDomainRecord;
 /*
 $dr = new DescribeDomainRecords();
 $dr->setDomainName('que360.com');
@@ -50,6 +50,9 @@ class Controller
             case '-list':
                 self::listDomainRecored($params);
                 break;
+            case '-delete':
+                self::deleteDomainRecord($params);
+                break;
             default:
                 echo 'Parameter error';
         }
@@ -83,6 +86,8 @@ class Controller
             echo $rs['Message'] ? 'Error:'. $rs['Message'] : 'error';
             return;
         }
+
+        echo 'success';
     }
 
     /**
@@ -107,16 +112,45 @@ class Controller
             ->setPageSize($pageSize);
         $rs =  Client::execute($request);
 
-        if (!$rs || array_key_exists('Code', $rs)) {
+        if (!$rs || array_key_exists('Code', $rs) || !$rs['DomainRecords']['Record']) {
             echo $rs['Message'] ? 'Error:'. $rs['Message'] : 'error';
             return;
         }
 
         // 成功输出
-        echo 'The current page:' . $rs['PageNumber'] . '/'. ceil($rs['TotalCount'] / $rs['PageSize']) . PHP_EOL;
-        echo 'total:' . $rs['TotalCount'];
+        echo 'Page:' . $rs['PageNumber'] . '/'. ceil($rs['TotalCount'] / $rs['PageSize']) . PHP_EOL;
+        echo 'Total:' . $rs['TotalCount'] . PHP_EOL . PHP_EOL;
+        echo 'RecordId  DomainName  RR  Value' . PHP_EOL;
+        
+        foreach ($rs['DomainRecords']['Record'] as $item) {
+            echo $item['RecordId'] . '    ' . $item['DomainName'] . '   ' . $item['RR'] . '   ' . $item['Value'] . PHP_EOL;
+        }
+    }
 
-        print_r($rs);
+    /**
+     * 删除解析记录
+     * @param  array $params 命令行参数
+     * @return string         
+     */
+    protected static function deleteDomainRecord($params)
+    {
+        $recordId = isset($params[1]) ? $params[1] : '';
+
+        if (!$recordId) {
+            echo 'recordId error';
+            return;
+        }
+
+        $request = new DeleteDomainRecord();
+        $request->setRecordId($recordId);
+        $rs =  Client::execute($request);
+
+        if (!$rs || array_key_exists('Code', $rs)) {
+            echo $rs['Message'] ? 'Error:'. $rs['Message'] : 'error';
+            return;
+        }
+
+        echo 'success';
     }
 
     /**
@@ -136,7 +170,6 @@ class Controller
 }
 
 // 开始执行
-
 // 定义全局
 global $argc, $argv;
 
