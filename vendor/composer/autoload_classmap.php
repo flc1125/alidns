@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Aliyun\\AliyunClient' => $baseDir . '/Aliyun/AliyunClient.class.php',
-    'Aliyun\\Config' => $baseDir . '/Aliyun/Config.class.php',
     'Aliyun\\Request\\AddDomainRecord' => $baseDir . '/Aliyun/Request/AddDomainRecord.class.php',
-    'Aliyun\\Sign' => $baseDir . '/Aliyun/Sign.class.php',
+    'Aliyun\\Request\\DeleteDomainRecord' => $baseDir . '/Aliyun/Request/DeleteDomainRecord.class.php',
+    'Aliyun\\Request\\DescribeDomainRecords' => $baseDir . '/Aliyun/Request/DescribeDomainRecords.class.php',
 );

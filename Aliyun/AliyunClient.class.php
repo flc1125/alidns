@@ -38,12 +38,11 @@ class AliyunClient
         $params['Signature'] = self::sign($params);
 
         $json =  self::http_gets($url, $params);
-        return $json;
 
         if (!$json)
             return false;
 
-        $result = json_decode($json);
+        $result = json_decode($json, true);
         if (!$result || !is_array($result))
             return false;
 

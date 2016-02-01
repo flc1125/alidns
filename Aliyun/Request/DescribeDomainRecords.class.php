@@ -51,7 +51,37 @@ class DescribeDomainRecords
      */
     public function setPageSize($value = 20)
     {
-        $this->params['PageNumber'] = $value;
+        $this->params['PageSize'] = $value;
+        return $this;
+    }
+
+    /**
+     * 设置主机记录的关键字，按照”%RRKeyWord%”模式搜索，不区分大小写
+     * @param [type] $value [description]
+     */
+    public function setRRKeyWord($value)
+    {
+        $this->params['RRKeyWord'] = $value;
+        return $this;
+    }
+
+    /**
+     * 设置解析类型的关键字，按照全匹配搜索，不区分大小写
+     * @param [type] $value [description]
+     */
+    public function setTypeKeyWord($value)
+    {
+        $this->params['TypeKeyWord'] = $value;
+        return $this;
+    }
+
+    /**
+     * 设置记录值的关键字，按照”%ValueKeyWord%”模式搜索，不区分大小写
+     * @param [type] $value [description]
+     */
+    public function setValueKeyWord($value)
+    {
+        $this->params['ValueKeyWord'] = $value;
         return $this;
     }
 
