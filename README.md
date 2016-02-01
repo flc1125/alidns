@@ -39,5 +39,5 @@
     - `[recordId]`可通过查看列表获取
     - `[主机记录]`若为空，则使用`@`代替
 
-- 范例：`php flc -update www 1.1.1.1`
+- 范例：`php flc -update 76203127 www 1.1.1.1`
 
