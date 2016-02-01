@@ -10,4 +10,5 @@ return array(
     'Aliyun\\Request\\AddDomainRecord' => $baseDir . '/Aliyun/Request/AddDomainRecord.class.php',
     'Aliyun\\Request\\DeleteDomainRecord' => $baseDir . '/Aliyun/Request/DeleteDomainRecord.class.php',
     'Aliyun\\Request\\DescribeDomainRecords' => $baseDir . '/Aliyun/Request/DescribeDomainRecords.class.php',
+    'Aliyun\\Request\\UpdateDomainRecord' => $baseDir . '/Aliyun/Request/UpdateDomainRecord.class.php',
 );

@@ -9,20 +9,12 @@ use Aliyun\AliyunClient as Client;
 use Aliyun\Request\AddDomainRecord;
 use Aliyun\Request\DescribeDomainRecords;
 use Aliyun\Request\DeleteDomainRecord;
-/*
-$dr = new DescribeDomainRecords();
-$dr->setDomainName('que360.com');
-
-$r = Client::execute($dr);
-print_r($r);
-
-exit;*/
-
+use Aliyun\Request\UpdateDomainRecord;
 
 /**
  * 初始化类
  */
-class Controller
+class FlcController
 {
     /**
      * 初始化
@@ -51,7 +43,10 @@ class Controller
                 self::listDomainRecored($params);
                 break;
             case '-delete':
-                self::deleteDomainRecord($params);
+                self::deleteDomainRecored($params);
+                break;
+            case '-update':
+                self::updateDomainRecored($params);
                 break;
             default:
                 echo 'Parameter error';
@@ -132,7 +127,7 @@ class Controller
      * @param  array $params 命令行参数
      * @return string         
      */
-    protected static function deleteDomainRecord($params)
+    protected static function deleteDomainRecored($params)
     {
         $recordId = isset($params[1]) ? $params[1] : '';
 
@@ -145,6 +140,36 @@ class Controller
         $request->setRecordId($recordId);
         $rs =  Client::execute($request);
 
+        if (!$rs || array_key_exists('Code', $rs)) {
+            echo $rs['Message'] ? 'Error:'. $rs['Message'] : 'error';
+            return;
+        }
+
+        echo 'success';
+    }
+
+    /**
+     * 修改域名解析记录，仅适用A记录
+     * @param array $params 参数
+     */
+    protected static function updateDomainRecored($params)
+    {
+        $recordId   = isset($params[1]) ? $params[1] : '';
+        $rr         = isset($params[2]) ? $params[2] : '';
+        $value      = isset($params[3]) ? $params[3] : '';
+
+        if (!$recordId || !$rr || !$value) {
+            echo 'Parameter error';
+            return;
+        }
+
+        $request = new UpdateDomainRecord();
+        $request->setRecordId($recordId)
+            ->setRR($rr)
+            ->setType('A')
+            ->setValue($value);
+        $rs =  Client::execute($request);
+        
         if (!$rs || array_key_exists('Code', $rs)) {
             echo $rs['Message'] ? 'Error:'. $rs['Message'] : 'error';
             return;
@@ -173,4 +198,4 @@ class Controller
 // 定义全局
 global $argc, $argv;
 
-Controller::init();
+FlcController::init();
