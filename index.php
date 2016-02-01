@@ -37,16 +37,16 @@ class FlcController
         $resp = array();
         switch ($action) {
             case '-add':
-                self::addDomainRecored($params);
+                self::addDomainRecord($params);
                 break;
             case '-list':
-                self::listDomainRecored($params);
+                self::listDomainRecord($params);
                 break;
             case '-delete':
-                self::deleteDomainRecored($params);
+                self::deleteDomainRecord($params);
                 break;
             case '-update':
-                self::updateDomainRecored($params);
+                self::updateDomainRecord($params);
                 break;
             default:
                 echo 'Parameter error';
@@ -59,7 +59,7 @@ class FlcController
      * 添加域名解析记录，仅适用A记录
      * @param array $params 参数
      */
-    protected static function addDomainRecored($params)
+    protected static function addDomainRecord($params)
     {
         $domainName = isset($params[1]) ? $params[1] : '';
         $rr         = isset($params[2]) ? $params[2] : '';
@@ -90,7 +90,7 @@ class FlcController
      * @param  [type] $params [description]
      * @return [type]         [description]
      */
-    protected static function listDomainRecored($params)
+    protected static function listDomainRecord($params)
     {
         $domainName = isset($params[1]) ? $params[1] : '';
         $page       = isset($params[2]) ? intval($params[2]) : 1;
@@ -127,7 +127,7 @@ class FlcController
      * @param  array $params 命令行参数
      * @return string         
      */
-    protected static function deleteDomainRecored($params)
+    protected static function deleteDomainRecord($params)
     {
         $recordId = isset($params[1]) ? $params[1] : '';
 
@@ -152,7 +152,7 @@ class FlcController
      * 修改域名解析记录，仅适用A记录
      * @param array $params 参数
      */
-    protected static function updateDomainRecored($params)
+    protected static function updateDomainRecord($params)
     {
         $recordId   = isset($params[1]) ? $params[1] : '';
         $rr         = isset($params[2]) ? $params[2] : '';
