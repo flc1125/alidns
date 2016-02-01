@@ -2,36 +2,42 @@
 
 ----
 
-#### 新增域名解析记录（目前只限制A记录）
+#### 配置说明
 
-- 格式：`php index.php -add [域名] [主机记录] [IP]`
+- 修改`/Aliyun/AliyunClient.class.php`的`$accessKeyId`及`$accessKeySecret`参数即可
 
-- 范例：`php index.php -add que360.com www 1.1.1.1`
+#### 使用方法
 
-#### 查看域名解析记录列表
+##### 新增域名解析记录（目前只限制A记录）
 
-- 格式：`php index.php -list [域名] [当前页] [每页数量]`；
+- 格式：`php flc -add [域名] [主机记录] [IP]`
+
+- 范例：`php flc -add que360.com www 1.1.1.1`
+
+##### 查看域名解析记录列表
+
+- 格式：`php flc -list [域名] [当前页] [每页数量]`；
 
     - `[当前页]`默认为1; `[每页数量]`默认为20
     - `[主机记录]`若为空，则使用`@`代替
 
-- 范例：`php index.php -list que360.com 1 10`
+- 范例：`php flc -list que360.com 1 10`
 
-#### 删除域名解析记录
+##### 删除域名解析记录
 
-- 格式：`php index.php -delete [recordId]`
+- 格式：`php flc -delete [recordId]`
 
     - `[recordId]`可通过查看列表获取
 
-- 范例：`php index.php -delete 76203127`
+- 范例：`php flc -delete 76203127`
 
 
-#### 修改域名解析记录（目前只限制A记录）
+##### 修改域名解析记录（目前只限制A记录）
 
-- 格式：`php index.php -update [recordId] [主机记录] [IP]`
+- 格式：`php flc -update [recordId] [主机记录] [IP]`
     
     - `[recordId]`可通过查看列表获取
     - `[主机记录]`若为空，则使用`@`代替
 
-- 范例：`php index.php -update www 1.1.1.1`
+- 范例：`php flc -update www 1.1.1.1`
 

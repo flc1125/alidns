@@ -13,13 +13,13 @@ class AliyunClient
      * 访问者的身份ID
      * @var string
      */
-    protected static $accessKeyId = 'rtfoKshq1JkVd5HA';
+    protected static $accessKeyId = '';
 
     /**
      * 密钥
      * @var string
      */
-    protected static $accessKeySecret = 'tB9iS7jqfFRm2m0nQHov1lyCjTwX5E';
+    protected static $accessKeySecret = '';
 
     /**
      * DNS API的服务接入地址
